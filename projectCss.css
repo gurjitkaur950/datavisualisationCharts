@@ -1,0 +1,169 @@
+*{
+    box-sizing: border-box;
+}
+#wrapper{
+    background-color:#231814;
+   
+    width:80%;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 5px 10px;
+}
+body{
+    background: #FCEBB6 url("image/background.gif");
+    color:#221811;
+    font-family: sans-serif;
+}
+header{
+    height: 150px;
+    background:#D2B48C;
+    display:block;
+}
+header img{ 
+    float:left; margin:20px;
+}
+h1{
+    line-height: 100%;
+    padding-top: 45px;
+    padding-left: 220px;
+    font-size: 3em;
+    text-align: center;
+}
+nav{
+    text-align: center;
+    padding-top:10px;
+   
+    float:left;
+    width: 200px;
+    display:block;
+}
+nav a{
+    font-weight: bold;
+    font-size:1.5em;
+   
+    text-decoration:none;
+}
+nav a:link{
+    color: #FEF6C2;
+}
+nav a:visited
+{
+    color:#D2B48C;
+}
+nav a:hover{
+    color:#CC9933;
+}
+nav ul{
+    list-style-type: none;
+    padding-left:0;
+}
+nav ul li{
+         margin-bottom:15px;
+
+}
+footer{
+    background-color:#D2B48C;
+    font-size:.60em;
+    text-align: center;
+    font-style: italic;
+    padding-bottom: 10px;
+    border-top: 2px solid #221811;
+    display:block;
+    font-size: 1em;
+}
+
+h4{
+    background-color: #D2B48C;
+    font-size: 1.2em;
+    padding-bottom:0;
+    padding-left:3em;
+    padding-right: 2em;
+    text-transform: uppercase;
+    float:none;
+    border-bottom: solid black;
+}
+#div1{
+    padding-top:1px;
+}
+main{
+    background-color: #FEF6C2;
+    padding-top: 0;
+    padding-bottom: 2em;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 200px;
+    display:block;
+    height:auto;
+}
+#heroroad
+{
+    height:10px;
+    
+    
+}
+
+
+#viz h2{
+    text-align: center;
+    padding-top: 12px;
+}
+#btnz{
+    width:120px;
+    display: inline;
+    margin:350px;
+}
+#btnz button{
+    text-align: center;
+    font-size: 1em;
+    background-color: burlywood;
+    font-weight: bold;
+    margin: 5px;
+    padding: 7px;
+}
+
+#text{
+    
+    margin:10px;
+    margin-left:80px;
+    padding:10px;
+  
+}
+.bottomText,.bottomText1,.bottomText2,.bottomText3,.bottomText4,.bottomText5,.bottomText6,.bottomText7{
+    font-size: 1.1em;
+}
+
+/*pie chart*/
+
+select{
+   float:left;
+    margin:15px;
+    padding:7px;
+    font-size: 1em;
+}
+#ratioDetail{
+   height:400px;
+    width:100%;
+    display:inline;
+}
+#ratioDetail svg{
+    width:550px;
+    height:300px;
+}
+#img{
+    margin:10px;
+}
+#row1{
+  
+    display: block;
+    clear: both;
+}
+#row2{
+    width:40%;
+    float: right;
+    display: inline;
+}
+
+label{
+    font-weight: bold;
+    font-size: 1.3em;
+}

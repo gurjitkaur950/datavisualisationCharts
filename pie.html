@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+</script>
+<![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+    <title>Data Visualisation Final Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="projectCss.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <img src="image/logo1.png" width="120" height="110">
+            <h1>Final Project - University</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pie.html">Pie Chart</a></li>
+                <li><a href="bar.html">Bar Chart</a></li>
+                <li><a href="tree.html">Tree Chart</a></li>
+            </ul>
+        </nav>
+        <main> 
+            <h2 style="text-align:center;">Pie Chart For Universities</h2>
+
+            <select id="d3-dropdown">
+                
+                <option value="Princeton University">Princeton University</option>
+                <option value="Harvard University">Harvard University</option>
+                <option value="Yale University">Yale University</option>
+                <option value="University of Chicago">University of Chicago</option>
+                <option value="Cornell University">Cornell University</option>
+                <option value="Brown University">Brown University</option>
+                <option value="Rice University">Rice University</option>
+                <option value="Georgetown University">Georgetown University</option>
+                <option value="Case Western Reserve University">Case Western Reserve University</option>
+                <option value="University of Florida">University of Florida</option>
+                <option value="University of Texas">University of Texas</option>
+
+
+            </select>
+           
+            <svg style="width:650px;height:370px;margin-top:20px;"></svg>
+            <div id="ratioDetail">
+                <row id="row1"><svg id="img" style="width:500;height:400;"></svg></row>
+                <row id="row2"><text class="display"></text></row>
+                
+            </div>
+            <script>
+                //Load the csv file 
+                var rr;
+                d3.csv("dataset.csv", d => test(d));
+
+                function test(d) {
+                    rr = d;
+                    console.log(rr);
+                    pieChart(rr);
+                }
+                var selected = "";
+                d3.select("#selected-dropdown").text("first");
+ 
+                d3.select("select")
+                    .on("change", function(d) {
+                        selected = d3.select("#d3-dropdown").node().value;
+                        console.log(selected);
+                        d3.select("svg").html("");
+                        
+                        pieChart(rr);
+                    })
+                //Create a function 
+                function pieChart(d) {
+                    var test = [];
+                    debugger;
+                    console.log(selected);
+                    
+                    //Create a pieChart variable 
+                    var pieChart = d3.pie();
+                     d3.select("#img").html("");
+                    d3.select(".display").html("");
+                    d.forEach(d => {
+                        debugger;
+                        if (d.University == selected) {
+
+                            test = [{
+                                val: +d.male,
+                                text: "male"
+                            }];
+                            test.push({
+                                val: +d.female,
+                                text: "female"
+                            });
+                            test.push({
+                                val: +d.faculty,
+                                text: "faculty"
+                            });
+                            test.push({
+                                val: +d.student,
+                                text: "student"
+                            });
+                        }
+                    })
+                        if(selected=="") {
+                            d.forEach(d => {
+                        if (d.University == "Princeton University") {
+
+                            test = [{
+                                val: +d.male,
+                                text: "male"
+                            }];
+                            test.push({
+                                val: +d.female,
+                                text: "female"
+                            });
+                            test.push({
+                                val: +d.faculty,
+                                text: "faculty"
+                            });
+                            test.push({
+                                val: +d.student,
+                                text: "student"
+                            });
+                        }
+                            
+                            })}
+                            
+                            
+                        
+
+                    
+
+                    console.log(test[0].val);
+                    pieChart.value(d => d.val);
+                    //Create a newArc variable 
+                    var newArc = d3.arc();
+                    newArc.innerRadius(0)
+                        .outerRadius(100);
+
+                    var myPie = pieChart(test);
+                    //  console.log(myPie);
+                    var fillScale = d3.scaleOrdinal()
+                        .domain(["Males", "Females", "Faculty", "Students"])
+
+                        .range(["#fcd88a", "#cf7c1c", "#93c464", "#75734F"])
+                    var legendA = d3.legendColor().scale(fillScale)
+                    d3.select("svg")
+                        .append("g")
+                        .attr("transform", "translate(500, 0)")
+                        .call(legendA)
+
+                    d3.select("svg")
+                        .append("g")
+                        .attr("transform", "translate(250,250)")
+                        .selectAll("path")
+                        .data(myPie)
+                        .enter()
+                        .append("path")
+                        .attr("d", newArc)
+                        .style("fill", (d, i) => fillScale(i))
+                        .style("stroke", "black")
+
+                        .style("stroke-width", "2px")
+                        .on("click", click);
+
+
+                }
+
+                function click(d) {
+                    d3.select("#img").html("");
+                    d3.select(".display").html("");
+                    console.log(d.data.text);
+                    if (d.data.text == "male") {
+                        d3.select("#img").append("image").attr('xlink:href', "image/male.jpg").attr("width", 600).attr("height", 500);
+                      d3.select("text.display").text("Percentage of male is " +d.data.val+ "%");
+
+                    } else if (d.data.text == "female") {
+                        d3.select("#img").append("image").attr('xlink:href', "image/female.jpg").attr("width", 600).attr("height", 500);
+                        d3.select("text.display").text("Percentage of female is " +d.data.val+ "%");
+                    } else if (d.data.text == "student") {
+                        d3.select("#img").append("image").attr('xlink:href', "image/student.jpg").attr("width", 600).attr("height", 500);
+                        d3.select("text.display").text("Percentage of student is " +d.data.val+ "%");
+
+                    } else {
+                        d3.select("#img").append("image").attr('xlink:href', "image/teacher.jpg").attr("width", 600).attr("height", 500);
+                        d3.select("text.display").text("Percentage of faculty is " +d.data.val+ "%");
+                    }
+                }
+            </script>
+        </main>
+        <footer>
+            Copyright &copy; 2019 Final Project- University<br><a href="mailto:gurjitkaur7106@gmail.com">gurjit@kaur.com</a>
+        </footer>
+    </div>
+</body></html>

@@ -1,0 +1,12 @@
+University,State,Control,male,female,student,faculty,InstateTution,OutofstateTution,Enrollment,GraduationRate,AcademicsScale,SocialScale,QualityOfLifeScale,x,y
+Princeton University,New Jersey,Private,65,35,7,1,"$41,820","$41,820","8,014",98,5,3,3,-74.6551,40.3431
+Harvard University,Massachusetts,Private,65,35,10,1,"$43,938","$43,938","19,882",75,5,3,4,-71.1097335,42.3736158
+Yale University,Connecticut,Private,55,45,5,8,"$45,800","$45,800","12,109",98,5,3,4,-72.9278835,41.308274
+University of Chicago,Illinois,State,5,1,8,1,"$44,757","$44,757","18,136",96,5,4,4,-87.6297982,41.8781136
+Cornell University,New York,Private,55,45,7,1,"$47,286","$47,286","21,593",60,5,3,2,-76.5018807,42.4439614
+Brown University,Rhode Island,Private,50,5,11,1,"$47,434","$47,434","8,943",94,5,4,5,-71.4025,41.8268
+Rice University,Texas,Private,2,1,9,1,"$40,566","$40,566","6,628",91,5,2,3,-95.3698028,29.7604267
+Georgetown University,District of Columbia,State,50,5,14,1,"$46,744","$46,744","17,849",92,3,4,3,-77.0368707,38.9071923
+Case Western Reserve University,Ohio,Private,70,3,9,1,"$43,158","$43,158","10,325",80,3,2,3,-81.6943605,41.49932
+University of Florida,Florida,Private,80,2,20,1,"$6,313","$28,591","49,787",87,3,3,3,-82.3248262,29.6516344
+University of Texas,Texas,State,60,4,12,1,"$9,798","$34,722","52,059",50,3,3,3,-97.7430608,30.267153

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+</script>
+<![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+    <title>Data Visualisation Final Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="projectCss.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <img src="image/logo1.png" width="120" height="110">
+            <h1>Final Project - University</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pie.html">Pie Chart</a></li>
+                <li><a href="bar.html">Bar Chart</a></li>
+                <li><a href="tree.html">Tree Chart</a></li>
+            </ul>
+        </nav>
+        <main>
+            <div id="heroroad">
+         </div>
+       <div id="viz">
+                <h2>Map of United States of America</h2>
+                <svg style="width:850px;height:500px;">
+                </svg>
+                <div id="btnz">
+                    <button id="universityButton" onclick="universityFn()">University</button>
+                    <button id="stateButton" onclick="stateFn()">State</button><br />
+                </div>
+                <div id="text">
+                   
+                    <text class="bottomText"></text><br />
+                    <text class="bottomText1"></text><br />
+                    <text class="bottomText2"></text><br />
+                    <text class="bottomText3"></text><br />
+                    <text class="bottomText4"></text><br />
+                    <text class="bottomText5"></text><br />
+                    <text class="bottomText6"></text><br />
+                    <text class="bottomText7"></text>
+              
+                </div>
+            </div>
+    <script>
+        var universityArr = [];
+        var stateArr = [];
+var unversitydata=[];
+        //Load the csv
+        var PromiseWrapper = (xhr, d) => new Promise(resolve => xhr(d, (p) => resolve(p)))
+        Promise.all([
+                PromiseWrapper(d3.json, "geo.json"),
+                PromiseWrapper(d3.csv, "dataset.csv")
+            ])
+            .then(resolve => {
+                createMap(resolve[0], resolve[1]);
+
+            });
+
+        //        //Create a function 
+        function createMap(state, university) {
+console.log(state);
+            university.forEach(d => {
+                universityArr.push(d.University);
+                stateArr.push(d.State);
+
+
+            });
+            unversitydata=university;
+            console.log(universityArr, stateArr);
+            var projection = d3.geoAlbers()
+                .scale(1000).translate([500,250]);
+
+            var geoPath = d3.geoPath().projection(projection);
+
+            var g = d3.select("svg").append("g");
+
+            g.selectAll("path.country")
+                .data(state.features)
+                .enter()
+                .append("path")
+                .attr("d", geoPath)
+                .attr("class", "country")
+                .style("stroke", "white")
+                .append("svg:title")
+                .text(function(d) {
+                   
+                    return d.properties.NAME;
+                });
+
+        }
+
+        function reset() {
+            d3.select("svg").selectAll("path.country").style("fill", "black").style("stroke", "white");
+        }
+
+        function universityFn() {
+            reset();
+            var projection = d3.geoAlbers()
+                .scale(1000).translate([500,250]);
+            console.log(unversitydata);
+           console.log(projection([unversitydata.x, unversitydata.y]));
+            d3.select("svg")
+                .selectAll("circle")
+                .data(unversitydata)
+                .enter()
+                .append("circle")
+                .attr("r", 6)
+                .attr("cx", d => projection([d.x, d.y])[0])
+                .attr("cy", d => projection([d.x, d.y])[1])
+                .style("fill", "red")
+               
+                .on("click",function(d) {
+                    display(d);
+                });
+
+        }
+        function display(d){
+            d3.select("text.bottomText").text("University: "+ d.University);
+            d3.select("text.bottomText1").text("In-State Tution: "+ d.InstateTution);
+            d3.select("text.bottomText2").text("Out-of-State Tution: "+ d.OutofstateTution);
+            d3.select("text.bottomText3").text("Enrollment: "+ d.Enrollment);
+            d3.select("text.bottomText4").text("Academics Scale: "+ d.AcademicsScale);
+            d3.select("text.bottomText5").text("Social Scale: "+ d.SocialScale);
+            d3.select("text.bottomText6").text("Quality-of-Life Scale: "+ d.QualityOfLifeScale);
+            d3.select("text.bottomText6").text("Control: "+ d.Control);
+        }
+        function stateFn() {
+                    console.log("path.country");
+                    reset();
+                     d3.select("svg").selectAll("path.country").filter(function(p, q) {
+                    return stateArr.indexOf(p.properties.NAME) > -1;
+                }).style("fill", "red").style("stroke", "white").transition().duration(0)
+                .style("fill", "green")
+                .transition().delay(1000).duration(1000)
+                .style("fill", "yellow")
+                .transition().delay(1000).duration(5000)
+                .style("fill", "red")
+                .style("fill", "green")
+                .transition().duration(1000)
+                .style("fill", "yellow")
+                .transition().delay(1000).duration(5000)
+                .style("fill", "green");
+
+                }
+        
+        
+        
+   </script>
+
+        </main>
+        <footer>
+            Copyright &copy; 2019 Final Project- University<br><a href="mailto:gurjitkaur7106@gmail.com">gurjit@kaur.com</a>
+        </footer>
+    </div>
+</body></html>
